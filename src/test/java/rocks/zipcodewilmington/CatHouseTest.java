@@ -1,6 +1,8 @@
 package rocks.zipcodewilmington;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import rocks.zipcodewilmington.animals.Animal;
 import rocks.zipcodewilmington.animals.Cat;
@@ -14,49 +16,76 @@ import java.util.Date;
  * @author leon on 4/19/18.
  */
 public class CatHouseTest {
-    // TODO - Create tests for `void add(Cat cat)`
-    // TODO - Create tests for `void remove(Integer id)`
-    // TODO - Create tests for `void remove(Cat cat)`
-    // TODO - Create tests for `Cat getCatById(Integer id)`
-    // TODO - Create tests for `Integer getNumberOfCats()`
 
-    @Test
-//    public void addTest(){
-//        Cat myCat1 = AnimalFactory.createCat("Kitty1", new Date(2001));
-//        Cat myCat2 = AnimalFactory.createCat("Kitty2", new Date(2002));
-//
-//        CatHouseTest.this.
-//        Integer expectedId = 1;
-//        Integer actualId = myCat1.getId();
+    private CatHouse myCatHouse;
 
-        //System.out.println( myCat1.getName()+" - " + myCat2.getName()+ " - " +myCat1.getId()
-        //                    + " -" + myCat2.getId() + "-" + CatHouse.getNumberOfCats());
-
-        Assert.assertEquals(expectedId,actualId);
+    @Before
+    public void setup(){
+        myCatHouse = new CatHouse();
     }
-    //    Create Test for Animal createDog(String name, Date birthDate)
-    //    ensure that when .createDog is invoked on AnimalFactoryTest a Dog is created with the respective name and birthDate value.
-    //    Create Test for Animal createCat(String name, Date birthDate)
-    //    ensure that when .createCat is invoked on AnimalFactoryTest a Dog is created with the respective name and birthDate value.
 
-//    @Test
-//    public void constructorTest() {
-//        // Given (cat data)
-//        String givenName = "Zula";
-//        Date givenBirthDate = new Date();
-//        Integer givenId = 0;
-//
-//        // When (a cat is constructed)
-//        Cat cat = new Cat(givenName, givenBirthDate, givenId);
-//
-//        // When (we retrieve data from the cat)
-//        String retrievedName = cat.getName();
-//        Date retrievedBirthDate = cat.getBirthDate();
-//        Integer retrievedId = cat.getId();
-//
-//        // Then (we expect the given data, to match the retrieved data)
-//        Assert.assertEquals(givenName, retrievedName);
-//        Assert.assertEquals(givenBirthDate, retrievedBirthDate);
-//        Assert.assertEquals(givenId, retrievedId);
-//    }
+    @After
+    public void tearDown(){
+        myCatHouse = null;
+    }
+
+    // TODO - Create tests for `void add(Cat cat)` (DONE)
+    @Test
+    public void addTest() {
+        Cat myCat1 = AnimalFactory.createCat("Kitty1", new Date(2001));
+        myCatHouse.add(myCat1);
+
+        Integer expected = 1;
+        Assert.assertEquals(expected, myCatHouse.getNumberOfCats());
+    }
+
+    // TODO - Create tests for `void remove(Integer id)` (DONE)
+    @Test
+    public void removeIdTest(){
+        Cat myCat = AnimalFactory.createCat("Kitty",new Date(2000));
+        Integer actualId = myCat.getId();
+        myCatHouse.add(myCat);
+        Integer actualCats = myCatHouse.getNumberOfCats();
+        myCatHouse.remove( actualId );
+        Integer expectedCats = myCatHouse.getNumberOfCats() + 1;
+        Assert.assertEquals(actualCats, expectedCats);
+    }
+
+
+    // TODO - Create tests for `void remove(Cat cat)`
+    @Test
+    public void removeTest(){
+
+        Cat myCat = AnimalFactory.createCat("Kitty", new Date(2000));
+        CatHouse myCatHouse = new CatHouse();
+        myCatHouse.add(myCat);
+        Integer expectedCats = myCatHouse.getNumberOfCats()-1;
+        myCatHouse.remove(myCat);
+        Integer actualCats = myCatHouse.getNumberOfCats();
+        Assert.assertEquals(expectedCats,actualCats);
+    }
+
+    // TODO - Create tests for `Cat getCatById(Integer id)`
+    @Test
+    public void getCatByIdTest(){
+        Cat myCat = AnimalFactory.createCat("Kitty",new Date(2000));
+        CatHouse myCatHouse = new CatHouse();
+        Integer expectedId = myCat.getId();
+        myCatHouse.add(myCat);
+        Integer actualId = myCatHouse.getCatById(myCat.getId()).getId();
+        Assert.assertEquals(expectedId, actualId);
+    }
+
+    // TODO - Create tests for `Integer getNumberOfCats()`
+    @Test
+    public void getNumberOfCats(){
+        Cat myCat = AnimalFactory.createCat("Kitty",new Date(2000));
+        CatHouse myCatHouse = new CatHouse();
+        myCatHouse.add(myCat);
+        Integer expectedCats = 1;
+        Integer actualCats = myCatHouse.getNumberOfCats();
+        Assert.assertEquals(expectedCats, actualCats);
+    }
+
+
 }

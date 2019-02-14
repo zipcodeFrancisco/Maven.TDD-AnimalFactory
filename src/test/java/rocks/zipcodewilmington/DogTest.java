@@ -5,6 +5,7 @@ import org.junit.Test;
 import rocks.zipcodewilmington.animals.Animal;
 import rocks.zipcodewilmington.animals.Dog;
 import rocks.zipcodewilmington.animals.Mammal;
+import rocks.zipcodewilmington.animals.animal_storage.DogHouse;
 
 import java.util.Date;
 
@@ -12,16 +13,22 @@ import java.util.Date;
  * @author leon on 4/19/18.
  */
 public class DogTest {
-    // TODO - Create tests for `new Dog(String name, Date birthDate, Integer id)`
-    // TODO - Create tests for `speak` (DONE)
-    // TODO - Create tests for `setBirthDate(Date birthDate)` (DONE)
-    // TODO - Create tests for `void eat(Food food)` (DONE)
-    // TODO - Create tests for `Integer getId()` (DONE)
-    // TODO - Create test to check Animal inheritance; google search `java instanceof keyword` (DONE)
-    // TODO - Create test to check Mammal inheritance; google search `java instanceof keyword` (DONE)
 
     // TODO - Create tests for `new Dog(String name, Date birthDate, Integer id)`
 
+    @Test
+    public void newDogTest(){
+        String name = "Doggy";
+        Date date = new Date(2000);
+        Integer id = 123;
+        Dog myDog = new Dog(name,date,id);
+        DogHouse myDogHouse = new DogHouse();
+        myDogHouse.add(myDog);
+        Integer expected = 1;
+        Integer actual = myDogHouse.getNumberOfDogs();
+        Assert.assertEquals(expected, actual);
+
+    }
 
     // TODO - Create tests for `speak`
     @Test

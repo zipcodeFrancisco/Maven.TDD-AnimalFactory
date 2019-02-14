@@ -22,4 +22,8 @@ public class AnimalFactory {
         Integer newId = CatHouse.getNumberOfCats();
         return new Cat(name, birthDate, newId);
     }
+
+
+
+
 }
